@@ -10,20 +10,23 @@ window.addEventListener('load', function () {
 });
 
 function initializeBoard() {
-    for (let i = 0; i < boardDimensionY; i++) {
-        for (let j = 0; j < boardDimensionX; j++) {
+    for (let y = 0; y < boardDimensionY; y++) {
+        for (let x = 0; x < boardDimensionX; x++) {
             var newTile = document.createElement('div');
             newTile.className = 'tile';
-            newTile.setAttribute('style', 'background-image: url("./assets/tiles/' + boardData[i][j]['image'] + '.png")');
-            newTile.setAttribute('data-positionX', i);
-            newTile.setAttribute('data-positionY', j);
+            newTile.setAttribute('style', 'background-image: url("./assets/tiles/' + boardData[x][y]['image'] + '.png")');
+
+            //add data that is useful for debugging
+            newTile.setAttribute('data-positionX', x);
+            newTile.setAttribute('data-positionY', y);
+            newTile.setAttribute('data-movementType', boardData[x][y]['movementType']);
+
             board.appendChild(newTile);
         }
       } 
 }
 
-//TODO: fix x- and y- axis
-
+// static board array for development purposes
 boardData[0] = [];
 boardData[0][0] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[0][1] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -35,11 +38,6 @@ boardData[0][6] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[0][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[0][8] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[0][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[0][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[0][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[0][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[0][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[0][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[1] = [];
 boardData[1][0] = { 'image': 'basic/rock', 'movementType': 1 };
@@ -52,11 +50,6 @@ boardData[1][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[1][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[1][8] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[1][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[1][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[1][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[1][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[1][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[1][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[2] = [];
 boardData[2][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -69,11 +62,6 @@ boardData[2][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[2][7] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[2][8] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[2][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[2][10] = { 'image': 'basic/weed', 'movementType': 0 };
-boardData[2][11] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[2][12] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[2][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[2][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[3] = [];
 boardData[3][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -86,11 +74,6 @@ boardData[3][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[3][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[3][8] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[3][9] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[3][10] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[3][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[3][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[3][13] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[3][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[4] = [];
 boardData[4][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -103,11 +86,6 @@ boardData[4][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[4][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[4][8] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[4][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[4][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[4][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[4][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[4][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[4][14] = { 'image': 'basic/rock', 'movementType': 1 };
 
 boardData[5] = [];
 boardData[5][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -120,11 +98,6 @@ boardData[5][6] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[5][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[5][8] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[5][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[5][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[5][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[5][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[5][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[5][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[6] = [];
 boardData[6][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -137,11 +110,6 @@ boardData[6][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[6][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[6][8] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[6][9] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[6][10] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[6][11] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[6][12] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[6][13] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[6][14] = { 'image': 'basic/rock', 'movementType': 1 };
 
 boardData[7] = [];
 boardData[7][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -154,11 +122,6 @@ boardData[7][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[7][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[7][8] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[7][9] = { 'image': 'basic/wooden_shield', 'movementType': 2 };
-boardData[7][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[7][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[7][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[7][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[7][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[8] = [];
 boardData[8][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -171,11 +134,6 @@ boardData[8][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[8][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[8][8] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[8][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[8][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[8][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[8][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[8][13] = { 'image': 'basic/flower', 'movementType': 0 };
-boardData[8][14] = { 'image': 'basic/grass1', 'movementType': 0 };
 
 boardData[9] = [];
 boardData[9][0] = { 'image': 'basic/grass1', 'movementType': 0 };
@@ -188,8 +146,63 @@ boardData[9][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[9][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[9][8] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[9][9] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[9][10] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[9][11] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[9][12] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[9][13] = { 'image': 'basic/grass1', 'movementType': 0 };
-boardData[9][14] = { 'image': 'basic/grass1', 'movementType': 0 };
+
+boardData[10] = [];
+boardData[10][0] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][1] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][2] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][3] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][4] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][5] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][6] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][7] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][8] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[10][9] = { 'image': 'basic/grass1', 'movementType': 0 };
+
+boardData[11] = [];
+boardData[11][0] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][1] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][2] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][3] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][4] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][5] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][6] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][7] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][8] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[11][9] = { 'image': 'basic/grass1', 'movementType': 0 };
+
+boardData[12] = [];
+boardData[12][0] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][1] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][2] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][3] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][4] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][5] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][6] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][7] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][8] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[12][9] = { 'image': 'basic/grass1', 'movementType': 0 };
+
+boardData[13] = [];
+boardData[13][0] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][1] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][2] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][3] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][4] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][5] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][6] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][7] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][8] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[13][9] = { 'image': 'basic/grass1', 'movementType': 0 };
+
+boardData[14] = [];
+boardData[14][0] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][1] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][2] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][3] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][4] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][5] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][6] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][7] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][8] = { 'image': 'basic/grass1', 'movementType': 0 };
+boardData[14][9] = { 'image': 'basic/grass1', 'movementType': 0 };

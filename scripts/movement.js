@@ -7,8 +7,6 @@ var loopCounter = 0;
 let framePixelDistance = tileSize / 8;
 var playerPositionX = 0;
 var playerPositionY = 0;
-var boardMaxX = 14;
-var boardMaxY = 9;
 
 window.addEventListener('load', function () {
     player = this.document.getElementById('player');
@@ -23,7 +21,7 @@ window.addEventListener('load', function () {
 function performPlayerMovement(e) {
     let direction = getMovementDirection(e.keyCode);
 
-    if(direction && isMovementPossible(direction) && !moveInterval) {
+    if(direction && isMovementPossible(direction, playerPositionX, playerPositionY) && !moveInterval) {
         moveInterval = setInterval(function(){
 
             switch(direction) {
@@ -105,21 +103,21 @@ function getMovementDirection(eKeyCode) {
     return direction;
 }
 
-function isMovementPossible(direction) {
+function isMovementPossible(direction, posX, posY) {
     let canMove;
 
     switch(direction) {
         case 'left':
-            canMove = ((playerPositionX > 0) && (boardData[playerPositionY][playerPositionX-1]['movementType'] == 0)) ? true : false;
+            canMove = ((posX > 0) && (boardData[posX-1][posY]['movementType'] == 0)) ? true : false;
             break;
         case 'up':
-            canMove = ((playerPositionY > 0) && (boardData[playerPositionY-1][playerPositionX]['movementType'] == 0)) ? true : false;
+            canMove = ((posY > 0) && (boardData[posX][posY-1]['movementType'] == 0)) ? true : false;
             break;
         case 'right':
-            canMove = ((playerPositionX < boardMaxX) && (boardData[playerPositionY][playerPositionX+1]['movementType'] == 0)) ? true : false;
+            canMove = ((posX < boardDimensionX) && (boardData[posX+1][posY]['movementType'] == 0)) ? true : false;
             break;
         case 'down':
-            canMove = ((playerPositionY < boardMaxY) && (boardData[playerPositionY+1][playerPositionX]['movementType'] == 0)) ? true : false;
+            canMove = ((posY < boardDimensionY) && (boardData[posX][posY+1]['movementType'] == 0)) ? true : false;
             break;
         default:
             canMove = false;
