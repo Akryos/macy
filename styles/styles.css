@@ -1,7 +1,7 @@
 #player {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 33px;
+    left: 33px;
     z-index: 10;
 }
 
@@ -12,6 +12,12 @@
     width: calc(32px * 15);
     height: calc(32px * 10);
     border: 1px solid black;
+}
+
+#buttonSolve {
+    position: absolute;
+    left: 33px;
+    top: 400px;
 }
 
 .tile {
