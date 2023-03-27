@@ -121,7 +121,7 @@ boardData[7][5] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[7][6] = { 'image': 'basic/rock', 'movementType': 1 };
 boardData[7][7] = { 'image': 'basic/grass1', 'movementType': 0 };
 boardData[7][8] = { 'image': 'basic/rock', 'movementType': 1 };
-boardData[7][9] = { 'image': 'basic/wooden_shield', 'movementType': 2 };
+boardData[7][9] = { 'image': 'basic/wooden_shield', 'movementType': 0 };
 
 boardData[8] = [];
 boardData[8][0] = { 'image': 'basic/grass1', 'movementType': 0 };
