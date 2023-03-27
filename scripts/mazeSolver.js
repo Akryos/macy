@@ -4,6 +4,7 @@ let endX = 7;
 let endY = 9;
 var alreadyVisited = [];
 var correctPath = [];
+var flatCorrectPath = [];
 
 window.addEventListener('load', function () {
     buttonSolve = this.document.getElementById('buttonSolve');
@@ -26,8 +27,7 @@ function solveMaze() {
     if(!solvable) {
         alert('not solvable');
     } else {
-        //show solution
-        console.log(correctPath);
+        showSolution();
     }
 }
 
@@ -37,16 +37,42 @@ function recursiveSolve(posX, posY) {
     alreadyVisited[posX][posY] = true; //mark current position as visited
 
     //check if moving left works
-    if(isMovementPossible('left', posX, posY)) {  if(recursiveSolve(posX-1, posY)) { correctPath[posX-1][posY] = true; return true; } }
+    if(isMovementPossible('left', posX, posY)) {  if(recursiveSolve(posX-1, posY)) { correctPath[posX-1][posY] = true; flatCorrectPath.push({'x': posX-1, 'y': posY}); return true; } }
 
     //check if moving down works
-    if(isMovementPossible('down', posX, posY)) { if(recursiveSolve(posX, posY+1)) { correctPath[posX][posY+1] = true; return true; } }
+    if(isMovementPossible('down', posX, posY)) { if(recursiveSolve(posX, posY+1)) { correctPath[posX][posY+1] = true; flatCorrectPath.push({'x': posX, 'y': posY+1}); return true; } }
 
     //check if moving right works
-    if(isMovementPossible('right', posX, posY)) { if(recursiveSolve(posX+1, posY)) { correctPath[posX+1][posY] = true; return true; } }
+    if(isMovementPossible('right', posX, posY)) { if(recursiveSolve(posX+1, posY)) { correctPath[posX+1][posY] = true; flatCorrectPath.push({'x': posX+1, 'y': posY}); return true; } }
 
     //check if moving up works
-    if(isMovementPossible('up', posX, posY)) { if(recursiveSolve(posX, posY-1)) { correctPath[posX][posY-1] = true; return true; } }
+    if(isMovementPossible('up', posX, posY)) { if(recursiveSolve(posX, posY-1)) { correctPath[posX][posY-1] = true; flatCorrectPath.push({'x': posX, 'y': posY-1}); return true; } }
 
     return false; //can move in no direction (either due to obstacles or already visiting all adjacent fields)
+}
+
+async function showSolution() {
+    var isFirst = true;
+    var prevElem;
+    var keyCodeHolder = new Object();
+    loopIteration = 0;
+
+    let reversedPath = flatCorrectPath.slice().reverse();
+    console.log(reversedPath);
+
+    /* for(const elem of reversedPath) {
+        if(isFirst) {
+            isFirst = false;
+            prevElem = elem;
+        } else {
+            if( (elem['x'] < prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 37; } //left
+            if( (elem['x'] == prevElem['x']) && (elem['y'] > prevElem['y']) ) { keyCodeHolder.keyCode = 40; } //down
+            if( (elem['x'] > prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 39; } //right
+            if( (elem['x'] == prevElem['x']) && (elem['y'] < prevElem['y']) ) { keyCodeHolder.keyCode = 38; } //up
+
+            // console.log(keyCodeHolder);
+            var abc = await performPlayerMovement(keyCodeHolder);
+            prevElem = elem;
+        }
+    } */
 }
