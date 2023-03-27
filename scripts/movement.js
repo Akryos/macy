@@ -114,10 +114,10 @@ function isMovementPossible(direction, posX, posY) {
             canMove = ((posY > 0) && (boardData[posX][posY-1]['movementType'] == 0)) ? true : false;
             break;
         case 'right':
-            canMove = ((posX < boardDimensionX) && (boardData[posX+1][posY]['movementType'] == 0)) ? true : false;
+            canMove = ((posX < (boardDimensionX-1)) && (boardData[posX+1][posY]['movementType'] == 0)) ? true : false;
             break;
         case 'down':
-            canMove = ((posY < boardDimensionY) && (boardData[posX][posY+1]['movementType'] == 0)) ? true : false;
+            canMove = ((posY < (boardDimensionY-1)) && (boardData[posX][posY+1]['movementType'] == 0)) ? true : false;
             break;
         default:
             canMove = false;
