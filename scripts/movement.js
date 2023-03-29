@@ -18,10 +18,12 @@ window.addEventListener('load', function () {
 
 
 
-function performPlayerMovement(e) {
+function performPlayerMovement(e, callback = false, callbackParam = false) {
+    console.log('beginning: ' + callbackParam);
     let direction = getMovementDirection(e.keyCode);
 
     if(direction && isMovementPossible(direction, playerPositionX, playerPositionY) && !moveInterval) {
+        console.log('middle: ' + callbackParam);
         moveInterval = setInterval(function(){
 
             switch(direction) {
@@ -47,9 +49,6 @@ function performPlayerMovement(e) {
             loopCounter += framePixelDistance;
 
             if(loopCounter == tileSize) {
-                loopCounter = 0;
-                moveInterval = clearInterval(moveInterval);
-
                 switch(direction) {
                     case 'left':
                         playerPositionX--;
@@ -65,6 +64,14 @@ function performPlayerMovement(e) {
                         break;
                     default:
                         break;
+                }
+
+                loopCounter = 0;
+                moveInterval = clearInterval(moveInterval);
+
+                if(callback) {
+                    console.log('end: ' + callbackParam);
+                    callback(callbackParam);
                 }
             }
         }, movementSpeed);

@@ -27,7 +27,7 @@ function solveMaze() {
     if(!solvable) {
         alert('not solvable');
     } else {
-        showSolution();
+        showSolution(1);
     }
 }
 
@@ -51,7 +51,48 @@ function recursiveSolve(posX, posY) {
     return false; //can move in no direction (either due to obstacles or already visiting all adjacent fields)
 }
 
-async function showSolution() {
+
+
+
+function showSolution(elementCounter = 0) {
+    console.log('loop nr: ' + elementCounter);
+    var isFirst = true;
+    var prevElem;
+    var keyCodeHolder = new Object();
+    let reversedPath = flatCorrectPath.slice().reverse();
+
+    if(elementCounter == 0) { //first loop, no prevElem
+        //can be skipped, is player start position
+    } else if(elementCounter + 1 == reversedPath.length) { //last element
+        prevElem = reversedPath[elementCounter-1];
+        elem = reversedPath[elementCounter];
+
+        if( (elem['x'] < prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 37; } //left
+        if( (elem['x'] == prevElem['x']) && (elem['y'] > prevElem['y']) ) { keyCodeHolder.keyCode = 40; } //down
+        if( (elem['x'] > prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 39; } //right
+        if( (elem['x'] == prevElem['x']) && (elem['y'] < prevElem['y']) ) { keyCodeHolder.keyCode = 38; } //up
+
+        console.log('end reached');
+        performPlayerMovement(keyCodeHolder);
+    } else {
+        prevElem = reversedPath[elementCounter-1];
+        elem = reversedPath[elementCounter];
+
+        if( (elem['x'] < prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 37; } //left
+        if( (elem['x'] == prevElem['x']) && (elem['y'] > prevElem['y']) ) { keyCodeHolder.keyCode = 40; } //down
+        if( (elem['x'] > prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 39; } //right
+        if( (elem['x'] == prevElem['x']) && (elem['y'] < prevElem['y']) ) { keyCodeHolder.keyCode = 38; } //up
+
+        performPlayerMovement(keyCodeHolder, showSolution, elementCounter+1);
+    }
+}
+
+
+
+
+
+
+/* function showSolution() {
     var isFirst = true;
     var prevElem;
     var keyCodeHolder = new Object();
@@ -60,7 +101,7 @@ async function showSolution() {
     let reversedPath = flatCorrectPath.slice().reverse();
     console.log(reversedPath);
 
-    /* for(const elem of reversedPath) {
+    for(const elem of reversedPath) {
         if(isFirst) {
             isFirst = false;
             prevElem = elem;
@@ -71,8 +112,9 @@ async function showSolution() {
             if( (elem['x'] == prevElem['x']) && (elem['y'] < prevElem['y']) ) { keyCodeHolder.keyCode = 38; } //up
 
             // console.log(keyCodeHolder);
-            var abc = await performPlayerMovement(keyCodeHolder);
+            performPlayerMovement(keyCodeHolder);
+
             prevElem = elem;
         }
-    } */
-}
+    }
+} */
