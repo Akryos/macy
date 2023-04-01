@@ -18,11 +18,15 @@ window.addEventListener('load', function () {
 
 
 
-function performPlayerMovement(e, callback = false, callbackParam = false) {
+function performPlayerMovement(e, needCheckMovement = true, callback = false, callbackParam = false) {
     console.log('beginning: ' + callbackParam);
     let direction = getMovementDirection(e.keyCode);
 
-    if(direction && isMovementPossible(direction, playerPositionX, playerPositionY) && !moveInterval) {
+    if(needCheckMovement && !isMovementPossible(direction, playerPositionX, playerPositionY)) {
+        return false;
+    }
+
+    if(direction && !moveInterval) {
         console.log('middle: ' + callbackParam);
         moveInterval = setInterval(function(){
 

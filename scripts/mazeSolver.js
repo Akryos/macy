@@ -51,15 +51,12 @@ function recursiveSolve(posX, posY) {
     return false; //can move in no direction (either due to obstacles or already visiting all adjacent fields)
 }
 
-
-
-
 function showSolution(elementCounter = 0) {
     console.log('loop nr: ' + elementCounter);
     var isFirst = true;
     var prevElem;
     var keyCodeHolder = new Object();
-    let reversedPath = flatCorrectPath.slice().reverse();
+    let reversedPath = [...[{'x':0,'y':0}], ...flatCorrectPath.slice().reverse()];
 
     if(elementCounter == 0) { //first loop, no prevElem
         //can be skipped, is player start position
@@ -83,38 +80,6 @@ function showSolution(elementCounter = 0) {
         if( (elem['x'] > prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 39; } //right
         if( (elem['x'] == prevElem['x']) && (elem['y'] < prevElem['y']) ) { keyCodeHolder.keyCode = 38; } //up
 
-        performPlayerMovement(keyCodeHolder, showSolution, elementCounter+1);
+        performPlayerMovement(keyCodeHolder, false, showSolution, elementCounter+1);
     }
 }
-
-
-
-
-
-
-/* function showSolution() {
-    var isFirst = true;
-    var prevElem;
-    var keyCodeHolder = new Object();
-    loopIteration = 0;
-
-    let reversedPath = flatCorrectPath.slice().reverse();
-    console.log(reversedPath);
-
-    for(const elem of reversedPath) {
-        if(isFirst) {
-            isFirst = false;
-            prevElem = elem;
-        } else {
-            if( (elem['x'] < prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 37; } //left
-            if( (elem['x'] == prevElem['x']) && (elem['y'] > prevElem['y']) ) { keyCodeHolder.keyCode = 40; } //down
-            if( (elem['x'] > prevElem['x']) && (elem['y'] == prevElem['y']) ) { keyCodeHolder.keyCode = 39; } //right
-            if( (elem['x'] == prevElem['x']) && (elem['y'] < prevElem['y']) ) { keyCodeHolder.keyCode = 38; } //up
-
-            // console.log(keyCodeHolder);
-            performPlayerMovement(keyCodeHolder);
-
-            prevElem = elem;
-        }
-    }
-} */
